@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>小墨鱼</title>
+  
+  <subtitle>心怀世界，逐梦天下</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://www.lmissy.cn/"/>
+  <updated>2019-06-27T12:09:32.598Z</updated>
+  <id>https://www.lmissy.cn/</id>
+  
+  <author>
+    <name>小墨鱼</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>win10搭建PHP环境</title>
+    <link href="https://www.lmissy.cn/2019/07/03/win10%E6%90%AD%E5%BB%BAPHP%E7%8E%AF%E5%A2%83/"/>
+    <id>https://www.lmissy.cn/2019/07/03/win10搭建PHP环境/</id>
+    <published>2019-07-03T06:59:36.000Z</published>
+    <updated>2019-06-27T12:09:32.598Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><ul><li>可以去官网下载，<a href="http://httpd.apache.org/download.cgi" target="_blank" rel="noopener">Apache下载</a></li><li>这里有部分版本的Apache，<a href="https://pan.baidu.com/s/1TG2JAsLVaqdt6rJ2LLq10A" target="_blank" rel="noopener">百度网盘下载</a>，密码：i2sw</li></ul><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote><p>以下安装方式是基于zip安装包的方式，并且是httpd-2.4.18-win64-VC14.zip，也就是基于visual studio 2015版本的Apache</p></blockquote><ol><li>解压zip包到任意目录，比如 <code>D:\Study\Apache\</code>，此时，该目录下多了一个<code>Apache24</code>文件夹以及连个文件：<code>-- Win64-2.4.18 VC14  --</code>，<code>ReadMe.txt</code></li><li>打开<code>ReadMe.txt</code>，找到安装部分的说明</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">Install</span><br><span class="line">-------</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- Unzip the Apache24 folder to c:/Apache24 (that is the ServerRoot in the config).</span><br><span class="line">  Default folder for your your webpages is DocumentRoot &quot;c:/Apache24/htdocs&quot;</span><br><span class="line"></span><br><span class="line">  When you unzip to an other location, change ServerRoot in the httpd.conf,</span><br><span class="line">  and change in httpd.conf the Documenroot, Directories, ScriptAlias,</span><br><span class="line">  also when you use the extra folder config file(s) change to your location there.</span><br><span class="line"></span><br><span class="line">Start apache in a DOS box:</span><br><span class="line"></span><br><span class="line">&gt;httpd.exe</span><br><span class="line"></span><br><span class="line">Install as a service:</span><br><span class="line"></span><br><span class="line">&gt;httpd.exe -k install</span><br><span class="line"></span><br><span class="line">ApacheMonitor:</span><br><span class="line"></span><br><span class="line">Double click ApacheMonitor.exe, or put it in your Startup folder.</span><br></pre></td></tr></table></figure><p>第一步解压已经完成，后面有两种启动方式，一种是命令行直接启动，一种是安装作为一个服务来启动，我们先用第一种方式</p><ol start="3"><li>进入Apache24目录下面的bin，我们可以发现确实存在httpd.exe文件，在bin目录下打开命令行，直接输入<code>httpd.exe</code>，我们发现并没有启动成功，报错了<br><img src="https://thumbnail0.baidupcs.com/thumbnail/4e0826ad1617e1035fbfbb32bf3e685a?fid=2016270247-250528-987860456618240&amp;time=1523239200&amp;rt=sh&amp;sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-P%2FgI6KfukOB%2B%2FIuRzXhbv4pVTww%3D&amp;expires=8h&amp;chkv=0&amp;chkbd=0&amp;chkpc=&amp;dp-logid=2282736967349901095&amp;dp-callid=0&amp;size=c710_u400&amp;quality=100&amp;vuk=-&amp;ft=video" alt="启动错误">，<br>显然是因为我们第一步的时候没有按照规定的路劲解压zip导致配置跟现在的路劲不匹配导致，因此，我们可以把文件移动到C盘，也可以修改配置文件，在此我们修改配置文件，把<code>conf/httpd.conf</code>文件的37行修改为</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ServerRoot &quot;D:/Study/Apache/Apache24&quot;</span><br></pre></td></tr></table></figure><p>然后再启动，发现还是有错误，<br><img src="https://thumbnail0.baidupcs.com/thumbnail/632700c9d5c3ef29d522d07c11d7d9b1?fid=2016270247-250528-636135417091727&amp;time=1523253600&amp;rt=sh&amp;sign=FDTAER-DCb740ccc5511e5e8fedcff06b081203-WT287xwAwov0MUvDxSqfOtINgIo%3D&amp;expires=8h&amp;chkv=0&amp;chkbd=0&amp;chkpc=&amp;dp-logid=2286964794878622759&amp;dp-callid=0&amp;size=c710_u400&amp;quality=100&amp;vuk=-&amp;ft=video" alt="启动错误DocumentRoot"><br>这次的是DocumentRoot目录找不到，DocumentRoot目录主要就是放置我们的网站内容的目录，因此这里也可以改成任意位置，这里，我改成了<code>F:/Workspace/www</code>。修改完了后，再次启动， 发现一切正常，哈哈，浏览器打开<code>localhost</code>发现啥都没有，因为我们的网站暂时没有内容，我们可以在<code>F:/Workspace/www</code>下建一个<code>html</code>文件来测试是否正常。</p><ol start="4"><li>在<code>F:/Workspace/www</code>目录下新建一个<code>index.php</code>文件，并且输入内容<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">echo phpinfo();</span><br></pre></td></tr></table></figure></li></ol><p>然后刷新浏览器，发现浏览器并没有显示对应的信息，只是显示了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Index of /</span><br><span class="line">index.php</span><br></pre></td></tr></table></figure></p><p>显然这是不正常的，我们要的是要显示当前PHP的信息，这是为啥呢，因为，咱们只是单纯的配置好了Apache，并没有配置好PHP的环境</p><h1 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h1><h2 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h2><ul><li><a href="http://www.php.net/" target="_blank" rel="noopener">PHP官网下载</a></li></ul><h2 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h2><blockquote><p>我们这里用的是PHP7.0.29版本</p></blockquote><ul><li>解压下载的zip包到<code>D:\Study\PHP\7.0.29</code>，此时<code>D:\Study\PHP\7.0.29</code>目录下有一个php.exe文件</li><li>复制一份<code>php.ini-development</code>改名为<code>php.ini</code></li><li>打开<code>php.ini</code>，并且找到<code>extension_dir</code>，将windows前面的那个分号去掉<blockquote><p>如果后续有问题，可以将这里的路径改成绝对路径</p></blockquote></li><li><p>打开Apache的配置文件conf\httpd.conf，找到LoadModule区域，在其后加入：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LoadModule php7_module &quot;D:\Study\PHP\7.0.29\php7apache2_4.dll&quot;</span><br><span class="line">PHPIniDir &quot;D:\Study\PHP\7.0.29\&quot; #告诉Apache PHP的安装路径</span><br></pre></td></tr></table></figure></li><li><p>查找 <code>AddType application/x-gzip .gz .tgz</code>，在其下一行添加代码：<code>AddType application/x-httpd-php .php .html</code></p></li><li>重启Apache，然后刷新浏览器，发现还是一样，url改成<code>localhost/index.php</code>，然后居然正常了</li><li>查找<code>DirectoryIndex</code>，在<code>index.html</code>前面加上<code>index.php</code>，重启，刷新，一切正常，完美(#^.^#)</li></ul><h1 id="开启多端口站点"><a href="#开启多端口站点" class="headerlink" title="开启多端口站点"></a>开启多端口站点</h1><ul><li>在Apache的<code>httpd.conf</code>文件找到<code>Include conf/extra/httpd-vhosts.conf</code>，删除前面的 <strong>#</strong> 。</li><li>在Apache的<code>httpd.conf</code>文件找到<code>Listen 80</code>，在下方增加<code>Listen 8200</code></li><li>找到<code>extra/httpd-vhosts.conf</code>增加目录，如下：</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;VirtualHost *:80&gt;</span><br><span class="line">    ServerAdmin webmaster@dummy-host.example.com</span><br><span class="line">    DocumentRoot &quot;F:/Workspace/www/80&quot;</span><br><span class="line">    ServerName dummy-host.example.com</span><br><span class="line">    ServerAlias www.dummy-host.example.com</span><br><span class="line">    ErrorLog &quot;logs/dummy-host.example.com-error.log&quot;</span><br><span class="line">    CustomLog &quot;logs/dummy-host.example.com-access.log&quot; common</span><br><span class="line">&lt;/VirtualHost&gt;</span><br><span class="line"></span><br><span class="line">&lt;VirtualHost *:8200&gt;</span><br><span class="line">    ServerAdmin webmaster@dummy-host2.example.com</span><br><span class="line">    DocumentRoot &quot;F:/Workspace/www/8200&quot;</span><br><span class="line">    ServerName dummy-host2.example.com</span><br><span class="line">    ErrorLog &quot;logs/dummy-host2.example.com-error.log&quot;</span><br><span class="line">    CustomLog &quot;logs/dummy-host2.example.com-access.log&quot; common</span><br><span class="line">&lt;/VirtualHost&gt;</span><br></pre></td></tr></table></figure><ul><li>重启Apache</li></ul><h1 id="开启rewrite模块"><a href="#开启rewrite模块" class="headerlink" title="开启rewrite模块"></a>开启rewrite模块</h1><ul><li>在Apache的<code>httpd.conf</code>文件找到<code>LoadModule rewrite_module modules/mod_rewrite.so</code>，删除前面的 <strong>#</strong></li><li>找到<code>DocumentRoot</code>下的<code>AllowOverride None</code>，改为<code>AllowOverride All</code></li></ul><h1 id="配置断点调试"><a href="#配置断点调试" class="headerlink" title="配置断点调试"></a>配置断点调试</h1><ul><li>下载xdebug<blockquote><p><a href="https://xdebug.org/download.php" target="_blank" rel="noopener">官网下载</a></p></blockquote></li><li>复制下载的文件到PHP安装目录的<code>ext</code>文件夹下</li><li>修改<code>php.ini</code>文件，增加<code>zend_extension=&quot;xdebug文件绝对路径&quot;</code></li><li>打开PHPstorm的监听按钮即可</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;Apache&quot;&gt;&lt;a href=&quot;#Apache&quot; class=&quot;headerlink&quot; title=&quot;Apache&quot;&gt;&lt;/a&gt;Apache&lt;/h1&gt;&lt;h2 id=&quot;下载&quot;&gt;&lt;a href=&quot;#下载&quot; class=&quot;headerlink&quot; title=&quot;下载&quot;&gt;&lt;
+      
+    
+    </summary>
+    
+    
+      <category term="php" scheme="https://www.lmissy.cn/tags/php/"/>
+    
+      <category term="环境" scheme="https://www.lmissy.cn/tags/%E7%8E%AF%E5%A2%83/"/>
+    
+      <category term="win10" scheme="https://www.lmissy.cn/tags/win10/"/>
+    
+      <category term="apache" scheme="https://www.lmissy.cn/tags/apache/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>hexo教程-安装</title>
+    <link href="https://www.lmissy.cn/2019/06/27/hexo%E6%95%99%E7%A8%8B-%E5%AE%89%E8%A3%85/"/>
+    <id>https://www.lmissy.cn/2019/06/27/hexo教程-安装/</id>
+    <published>2019-06-27T12:09:11.000Z</published>
+    <updated>2019-06-27T14:15:50.496Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文只作为基础使用备忘，更详细教程请参考<a href="https://hexo.io/docs/" target="_blank" rel="noopener">官方文档</a>。</p><h2 id="安装准备"><a href="#安装准备" class="headerlink" title="安装准备"></a>安装准备</h2><ul><li><a href="https://nodejs.org/zh-cn/" target="_blank" rel="noopener">NodeJs</a></li><li><a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a></li></ul><blockquote><p>NodeJs的安装请参考 <a href="/2019/05/27/NodeJs安装/">NodeJs安装</a><br>Git的安装请参考 <a href="/2019/05/27/Git安装/">Git安装</a></p></blockquote><h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p>所有必备的应用程序安装完成后，即可使用 npm 安装 Hexo。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure></p><h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><p>安装 Hexo 完成后，请执行下列命令，Hexo 将会在指定文件夹中新建所需要的文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init &lt;folder&gt;</span><br><span class="line">$ cd &lt;folder&gt;</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure></p><h2 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h2><p>新建完成后，指定文件夹的目录如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── _config.yml</span><br><span class="line">├── package.json</span><br><span class="line">├── scaffolds</span><br><span class="line">├── source</span><br><span class="line">|   ├── _drafts</span><br><span class="line">|   └── _posts</span><br><span class="line">└── themes</span><br></pre></td></tr></table></figure></p><h3 id="config-yml"><a href="#config-yml" class="headerlink" title="_config.yml"></a>_config.yml</h3><p>网站的 配置 信息，您可以在此配置大部分的参数。</p><h3 id="package-json"><a href="#package-json" class="headerlink" title="package.json"></a>package.json</h3><p>应用程序的信息。<a href="https://ejs.co/" target="_blank" rel="noopener">EJS</a>, <a href="http://learnboost.github.io/stylus/" target="_blank" rel="noopener">Stylus</a> 和 <a href="http://daringfireball.net/projects/markdown/" target="_blank" rel="noopener">Markdown</a> renderer 已默认安装，您可以自由移除。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;name&quot;: &quot;hexo-site&quot;,</span><br><span class="line">  &quot;version&quot;: &quot;0.0.0&quot;,</span><br><span class="line">  &quot;private&quot;: true,</span><br><span class="line">  &quot;hexo&quot;: &#123;</span><br><span class="line">    &quot;version&quot;: &quot;&quot;</span><br><span class="line">  &#125;,</span><br><span class="line">  &quot;dependencies&quot;: &#123;</span><br><span class="line">    &quot;hexo&quot;: &quot;^3.8.0&quot;,</span><br><span class="line">    &quot;hexo-generator-archive&quot;: &quot;^0.1.5&quot;,</span><br><span class="line">    &quot;hexo-generator-category&quot;: &quot;^0.1.3&quot;,</span><br><span class="line">    &quot;hexo-generator-index&quot;: &quot;^0.2.1&quot;,</span><br><span class="line">    &quot;hexo-generator-tag&quot;: &quot;^0.2.0&quot;,</span><br><span class="line">    &quot;hexo-renderer-ejs&quot;: &quot;^0.3.1&quot;,</span><br><span class="line">    &quot;hexo-renderer-stylus&quot;: &quot;^0.3.3&quot;,</span><br><span class="line">    &quot;hexo-renderer-marked&quot;: &quot;^0.3.2&quot;,</span><br><span class="line">    &quot;hexo-server&quot;: &quot;^0.3.3&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><h3 id="scaffolds"><a href="#scaffolds" class="headerlink" title="scaffolds"></a>scaffolds</h3><p><a href="#">模版</a> 文件夹。当您新建文章时，Hexo 会根据 scaffold 来建立文件。</p><p>Hexo的模板是指在新建的markdown文件中默认填充的内容。例如，如果您修改scaffold/post.md中的Front-matter内容，那么每次新建一篇文章时都会包含这个修改。</p><h3 id="source"><a href="#source" class="headerlink" title="source"></a>source</h3><p>资源文件夹是存放用户资源的地方。除 _posts 文件夹之外，开头命名为 _ (下划线)的文件 / 文件夹和隐藏的文件将会被忽略。Markdown 和 HTML 文件会被解析并放到 public 文件夹，而其他文件会被拷贝过去。</p><h3 id="themes"><a href="#themes" class="headerlink" title="themes"></a>themes</h3><p><a href="#">主题</a> 文件夹。Hexo 会根据主题来生成静态页面。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;本文只作为基础使用备忘，更详细教程请参考&lt;a href=&quot;https://hexo.io/docs/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;官方文档&lt;/a&gt;。&lt;/p&gt;
+&lt;h2 id=&quot;安装准备&quot;&gt;&lt;a href=&quot;#安装准备&quot; class=&quot;hea
+      
+    
+    </summary>
+    
+    
+      <category term="安装" scheme="https://www.lmissy.cn/tags/%E5%AE%89%E8%A3%85/"/>
+    
+      <category term="hexo" scheme="https://www.lmissy.cn/tags/hexo/"/>
+    
+      <category term="Blog" scheme="https://www.lmissy.cn/tags/Blog/"/>
+    
+      <category term="博客" scheme="https://www.lmissy.cn/tags/%E5%8D%9A%E5%AE%A2/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>NodeJs安装</title>
+    <link href="https://www.lmissy.cn/2019/05/27/NodeJs%E5%AE%89%E8%A3%85/"/>
+    <id>https://www.lmissy.cn/2019/05/27/NodeJs安装/</id>
+    <published>2019-05-27T12:27:57.000Z</published>
+    <updated>2019-06-27T14:04:58.135Z</updated>
+    
+    <content type="html"><![CDATA[<p>简单的说 Node.js 就是运行在服务端的 <code>JavaScript</code>。<br><code>Node.js</code> 是一个基于<code>Chrome</code> <code>JavaScript</code> 运行时建立的一个平台。<br><code>Node.js</code>是一个事件驱动I/O服务端<code>JavaScript</code>环境，基于<code>Google</code>的V8引擎，V8引擎执行<code>Javascript</code>的速度非常快，性能非常好。</p><h2 id="cURL"><a href="#cURL" class="headerlink" title="cURL"></a>cURL</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl https://raw.github.com/creationix/nvm/v0.33.11/install.sh | sh</span><br></pre></td></tr></table></figure><h2 id="Wget"><a href="#Wget" class="headerlink" title="Wget"></a>Wget</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -qO- https://raw.github.com/creationix/nvm/v0.33.11/install.sh | sh</span><br></pre></td></tr></table></figure><p>安装完成后，重启终端并执行下列命令即可安装 <code>Node.js</code>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm install stable</span><br></pre></td></tr></table></figure></p><blockquote><h2 id="Windows-用户"><a href="#Windows-用户" class="headerlink" title="Windows 用户"></a>Windows 用户</h2><p>对于windows用户来说，建议使用安装程序进行安装。安装时，请勾选Add to PATH选项。<br>另外，您也可以使用Git Bash，这是git for windows自带的一组程序，提供了Linux风格的shell，在该环境下，您可以直接用上面提到的命令来安装Node.js。打开它的方法很简单，在任意位置单击右键，选择“Git Bash Here”即可。由于Hexo的很多操作都涉及到命令行，您可以考虑始终使用Git Bash来进行操作。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;简单的说 Node.js 就是运行在服务端的 &lt;code&gt;JavaScript&lt;/code&gt;。&lt;br&gt;&lt;code&gt;Node.js&lt;/code&gt; 是一个基于&lt;code&gt;Chrome&lt;/code&gt; &lt;code&gt;JavaScript&lt;/code&gt; 运行时建立的一个平台。&lt;br&gt;&lt;
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Git安装</title>
+    <link href="https://www.lmissy.cn/2019/05/27/Git%E5%AE%89%E8%A3%85/"/>
+    <id>https://www.lmissy.cn/2019/05/27/Git安装/</id>
+    <published>2019-05-27T12:09:11.000Z</published>
+    <updated>2019-06-27T12:16:11.388Z</updated>
+    
+    <content type="html"><![CDATA[<p>Git 是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目</p><h2 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h2><ul><li>Windows：下载并安装 <a href="https://git-scm.com/" target="_blank" rel="noopener">Git</a>.</li><li>Mac：使用 <a href="https://brew.sh/" target="_blank" rel="noopener">Homebrew</a>, <a href="http://www.macports.org/" target="_blank" rel="noopener">MacPorts</a> ：brew install git;或下载 <a href="https://git-scm.com/download/mac" target="_blank" rel="noopener">安装程序</a> 安装。</li></ul><blockquote><h1 id="Windows-用户"><a href="#Windows-用户" class="headerlink" title="Windows 用户"></a>Windows 用户</h1><p>由于众所周知的原因，从上面的链接下载git for windows最好挂上一个代理，否则下载速度十分缓慢。也可以参考<a href="https://github.com/waylau/git-for-win" target="_blank" rel="noopener">这个页面</a>，收录了存储于百度云的下载地址。</p></blockquote>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Git 是一个开源的分布式版本控制系统，用于敏捷高效地处理任何或小或大的项目&lt;/p&gt;
+&lt;h2 id=&quot;安装Git&quot;&gt;&lt;a href=&quot;#安装Git&quot; class=&quot;headerlink&quot; title=&quot;安装Git&quot;&gt;&lt;/a&gt;安装Git&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;Window
+      
+    
+    </summary>
+    
+    
+      <category term="Git" scheme="https://www.lmissy.cn/tags/Git/"/>
+    
+      <category term="安装" scheme="https://www.lmissy.cn/tags/%E5%AE%89%E8%A3%85/"/>
+    
+  </entry>
+  
+</feed>
